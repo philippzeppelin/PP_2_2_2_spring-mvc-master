@@ -15,12 +15,11 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> showCars() {
-        return carDAO.getListOfCars();
-    }
-
-    @Override
     public List<Car> showCars(int numberOfCars) {
-        return carDAO.getListOfCars(numberOfCars);
+        if (numberOfCars > 0 && numberOfCars < 5) {
+            return carDAO.getListOfCars(numberOfCars);
+        } else {
+            return carDAO.getListOfCars();
+        }
     }
 }
