@@ -16,11 +16,11 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Car> showCars() {
-        return carDAO.listCars();
+        return carDAO.getListOfCars();
     }
 
     @Override
     public List<Car> showCars(int numberOfCars) {
-        return carDAO.listCars(numberOfCars);
+        return carDAO.getListOfCars(numberOfCars);
     }
 }

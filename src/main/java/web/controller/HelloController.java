@@ -9,6 +9,7 @@ import java.util.List;
 
 @Controller
 public class HelloController {
+    // TODO Перенести логику в сервис слой
     @GetMapping(value = "/")
     public String printWelcome(ModelMap model) {
         List<String> messages = new ArrayList<>();

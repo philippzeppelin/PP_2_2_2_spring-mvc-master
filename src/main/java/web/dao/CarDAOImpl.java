@@ -1,30 +1,36 @@
 package web.dao;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import web.models.Car;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class CarDAOImpl implements CarDAO {
-    private final JdbcTemplate jdbcTemplate;
+    List<Car> listOfCars;
 
-    public CarDAOImpl(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    {
+        listOfCars = new ArrayList<>();
+
+        listOfCars.add(new Car(1, "Nissan", 1000));
+        listOfCars.add(new Car(2, "Lada", 1001));
+        listOfCars.add(new Car(3, "Zaparozhets", 1002));
+        listOfCars.add(new Car(4, "Subaru", 1003));
+        listOfCars.add(new Car(5, "Mercedes", 1004));
     }
 
     @Override
-    public List<Car> listCars() {
-        return jdbcTemplate.query("SELECT * FROM Car;",
-                new BeanPropertyRowMapper<>(Car.class));
+    public List<Car> getListOfCars() {
+        return listOfCars;
     }
 
     @Override
-    public List<Car> listCars(int numberOfCars) {
-        return jdbcTemplate.query("SELECT * FROM Car LIMIT ?",
-                new Object[]{numberOfCars},
-                new BeanPropertyRowMapper<>(Car.class));
+    public List<Car> getListOfCars(int numberOfCars) {
+        if (numberOfCars >= listOfCars.size()) {
+            return new ArrayList<>(listOfCars);
+        }
+
+        return new ArrayList<>(listOfCars.subList(0, numberOfCars));
     }
 }
